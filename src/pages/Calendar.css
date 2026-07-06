@@ -1,0 +1,48 @@
+/* Calendar.css */
+.calendar-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-day {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  height: 80px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.calendar-day.header {
+  background: transparent;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+.calendar-day.empty {
+  background: transparent;
+}
+
+/* Highlight days that have a note */
+.calendar-day.has-note {
+  border: 2px solid var(--accent-color);
+  background: var(--glass-bg);
+}
