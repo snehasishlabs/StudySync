@@ -26,7 +26,7 @@ flowchart TD
     G --> H[Timer Logic]
     G --> I[Sound Variations]
     E --> J[Calendar Component]
-    J --> K[Note Storage (localStorage)]
+    J --> K["Note Storage (localStorage)"]
     F --> L[Task Board (DnD)]
     A --> M[ThemeContext]
     M --> N[Light/Dark Switch]
