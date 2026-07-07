@@ -106,4 +106,4 @@ This project is licensed under the MIT License – see the `LICENSE` file for de
 ---
 
 Enjoy the app and happy productive hacking! 🎉
->>>>>>> d9729d7 (feat: complete pomodoro sound variations, calendar note highlighting, and documentation)
+

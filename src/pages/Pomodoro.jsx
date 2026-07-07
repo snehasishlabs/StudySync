@@ -1,34 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause, RotateCw } from 'lucide-react';
+import alarm1 from '../assets/sounds/alarm1.mp3';
+import alarm2 from '../assets/sounds/alarm2.mp3';
+import alarm3 from '../assets/sounds/alarm3.mp3';
 
 const Pomodoro = () => {
   const WORK_MINUTES = 25;
   const BREAK_MINUTES = 5;
 
     // Sound variation options
+  // Sound variation options using pre‑recorded alarm files
+  // Sound variation options using pre‑recorded alarm files
   const soundVariants = [
-    { type: 'sine', freq: 440 }, // Classic beep
-    { type: 'square', freq: 660 }, // Higher, sharper
-    { type: 'triangle', freq: 550 }, // Warm tone
+    { name: 'Alarm 1', src: alarm1 },
+    { name: 'Alarm 2', src: alarm2 },
+    { name: 'Alarm 3', src: alarm3 },
   ];
   const [variantIndex, setVariantIndex] = useState(0);
 
+  // Play the selected alarm sound using an HTMLAudioElement
   const playBeep = () => {
     try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      const ctx = new AudioContext();
-      const oscillator = ctx.createOscillator();
-      const gain = ctx.createGain();
-      const variant = soundVariants[variantIndex];
-      oscillator.type = variant.type;
-      oscillator.frequency.setValueAtTime(variant.freq, ctx.currentTime);
-      oscillator.connect(gain);
-      gain.connect(ctx.destination);
-      oscillator.start();
-      gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.5);
-      oscillator.stop(ctx.currentTime + 0.5);
+      const sound = soundVariants[variantIndex];
+      const audio = new Audio(sound.src);
+      audio.play();
     } catch (e) {
-      console.error('Beep not supported', e);
+      console.error('Alarm playback failed', e);
     }
   };
 
@@ -94,9 +91,9 @@ const Pomodoro = () => {
       <button className="btn" onClick={handleStartPause} style={{ marginRight: '0.5rem' }}>
         {isRunning ? <Pause size={20} /> : <Play size={20} />} {isRunning ? 'Pause' : 'Start'}
       </button>
-      <button className="btn btn-secondary" onClick={cycleSoundVariant} style={{ marginRight: '0.5rem' }}>
-        Change Sound
-      </button>
+        <button className="btn btn-secondary" onClick={cycleSoundVariant} style={{ marginRight: '0.5rem' }}>
+          Change Sound ({soundVariants[variantIndex].name})
+        </button>
       <button className="btn btn-secondary" onClick={handleReset}>
         <RotateCw size={20} /> Reset
       </button>
